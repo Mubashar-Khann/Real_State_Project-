@@ -3,7 +3,7 @@
 
 namespace RealState.Core.Repository
 {
-    public  interface ISociety
+    public  interface ISocietyRepository
     {
         Task AddSocietyAsync(SocietyDTO Society);
         Task RemoveSocietyAsync(int id);

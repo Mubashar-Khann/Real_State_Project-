@@ -9,28 +9,33 @@ namespace RealState.Service
 {
     public class ParkingService : IParkingService
     {
+        private readonly IParkingRepository _parking;
+        public ParkingService(IParkingRepository parking) 
+        {
+            _parking = parking;
+        }
         public async Task AddParkingAsync(ParkingDTO dto)
         {
-            IParking parking = new ParkingRepository();
-            await parking.AddParkingAsync(dto);
+            
+            await _parking.AddParkingAsync(dto);
         }
 
         public async Task<List<ParkingDTO>> GetAllParkingAsync()
         {
-            IParking parking = new ParkingRepository();
-            return await parking.GetAllParkingAsync();
+            
+            return await _parking.GetAllParkingAsync();
         }
 
         public async Task RemoveParkingAsync(int id)
         {
-            IParking parking = new ParkingRepository();
-            await parking.RemoveParkingAsync(id);
+            ;
+            await _parking.RemoveParkingAsync(id);
         }
 
         public async Task UpdateParkingAsync(ParkingDTO dto)
         {
-            IParking parking = new ParkingRepository();
-            await parking.UpdateParkingAsync(dto);
+
+            await _parking.UpdateParkingAsync(dto);
         }
     }
 }

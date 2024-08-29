@@ -13,6 +13,8 @@ namespace RealState.Repository
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<Society> Societies { get; set; }
 
+       
+
         public virtual DbSet<BuildingSociety> BuildingSocieties { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -38,7 +40,7 @@ namespace RealState.Repository
 
             //One To One Relation Between Room and Parking
             modelBuilder.Entity<Room>()          
-                        .HasOne<Parking>(r => r.Parking)
+                        .HasOne(r => r.Parking)
                         .WithOne(r => r.Room)
                         .HasForeignKey<Parking>(r => r.RoomId)
                         .OnDelete(DeleteBehavior.Cascade);

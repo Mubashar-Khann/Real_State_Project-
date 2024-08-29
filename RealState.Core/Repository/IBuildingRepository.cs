@@ -4,7 +4,7 @@ using RealState.Core.DTOs;
 
 namespace RealState.Core.Repository
 {
-    public interface IBuilding
+    public interface IBuildingRepository
     {
         Task AddBuildingAsync(BuildingDTO building);
         Task RemoveBuildingAsync(int id);

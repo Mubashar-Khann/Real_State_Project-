@@ -10,32 +10,35 @@ namespace RealState.Service
 {
     public class SocietyService : ISocietyService
     {
-        
-
+        private readonly ISocietyRepository _society;
+        public SocietyService(ISocietyRepository society) 
+        {
+            _society=society;
+        }
         public async Task AddSocietyAsync(SocietyDTO Society)
         {
-            ISociety societyRepository = new SocietyRepository();
-          await  societyRepository.AddSocietyAsync(Society);
+           
+          await _society.AddSocietyAsync(Society);
         }
 
         public async Task<List<SocietyDTO>> GetAllSocietyAsync()
         {
-            ISociety ss=new SocietyRepository();
-            List<SocietyDTO> values=await ss.GetAllSocietyAsync();
+            
+            List<SocietyDTO> values=await _society.GetAllSocietyAsync();
             return values;
         }
 
         public async Task RemoveSocietyAsync(int id)
         {
-            ISociety societyRepository = new SocietyRepository();
-            await societyRepository.RemoveSocietyAsync(id);
+           
+            await _society.RemoveSocietyAsync(id);
 
         }
 
         public async Task UpdateSocietyAsync(SocietyDTO Society)
         {
-            ISociety societyService = new SocietyRepository();
-            await  societyService.UpdateSocietyAsync(Society);
+           
+            await _society.UpdateSocietyAsync(Society);
         }
     }
 }

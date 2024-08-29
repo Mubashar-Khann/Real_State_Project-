@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RealState.Core.Repository
 {
-    public interface IRoom
+    public interface IRoomRepository
     {
         Task AddRoomAsync(RoomDTO room);
         Task RemoveRoomAsync(int id);

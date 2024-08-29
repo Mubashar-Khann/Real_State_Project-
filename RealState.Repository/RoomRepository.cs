@@ -7,9 +7,16 @@ using RealState.Repository.Entity;
 
 namespace RealState.Repository
 {
-    public class RoomRepository : IRoom
+    public class RoomRepository : IRoomRepository
     {
         RealStateDbContext Context=new RealStateDbContext();
+
+        private readonly InMemoryDb _inMemoryDb; 
+        public RoomRepository(InMemoryDb inMemoryDb)
+        {
+            _inMemoryDb = inMemoryDb;
+
+        }
         public async Task AddRoomAsync(RoomDTO room)
         {
             var RoomTable = new Room()
@@ -42,13 +49,13 @@ namespace RealState.Repository
         {
             var roomEntity =await  Context.Rooms.FindAsync(id);
             Console.WriteLine(  roomEntity.Id+" "+roomEntity.Room_Name);
-            //if(roomEntity != null)
-            //{
-            //    Console.WriteLine(  roomEntity.Room_Name +"  "+roomEntity.No_Of_Floor);
-            //    Context.Rooms.Remove(roomEntity);
-            //    await Context.SaveChangesAsync();
-            //    Console.WriteLine(  "This Object is  Removed");
-            //}
+            if(roomEntity != null)
+            {
+                Console.WriteLine(roomEntity.Room_Name + "  " + roomEntity.No_Of_Floor);
+                Context.Rooms.Remove(roomEntity);
+                await Context.SaveChangesAsync();
+                Console.WriteLine("This Object is  Removed");
+            }
         }
 
         public async Task UpdateRoomAsync(RoomDTO Update)
@@ -65,5 +72,7 @@ namespace RealState.Repository
             }
 
         }
+
+      
     }
 }

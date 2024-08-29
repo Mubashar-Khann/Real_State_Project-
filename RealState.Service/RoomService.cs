@@ -10,28 +10,32 @@ namespace RealState.Service
 {
     public class RoomService : IRoomService
     {
+        private readonly IRoomRepository _room;
+        public RoomService(IRoomRepository room) 
+        {
+            _room = room;
+        }
         public async Task AddRoomAsync(RoomDTO room)
         {
-            IRoom RoomObject = new RoomRepository();
-            await RoomObject.AddRoomAsync(room);
+            await _room.AddRoomAsync(room);
         }
 
         public async Task<List<RoomDTO>> GetAllRoomAsync()
         {
-          IRoom room = new RoomRepository();
-            return  await room.GetAllRoomAsync();
+        
+            return await _room.GetAllRoomAsync();
         }
 
         public async Task RemoveRoomAsync(int id)
         {
-            IRoom room=new RoomRepository();
-           await room.RemoveRoomAsync(id);
+            
+           await _room.RemoveRoomAsync(id);
         }
 
         public async Task UpdateRoomAsync(RoomDTO update)
         {
-            IRoom room = new RoomRepository();
-            await room.UpdateRoomAsync(update);
+           
+            await _room.UpdateRoomAsync(update);
         }
     }
 }
